@@ -51,6 +51,10 @@ class FilterProvider with ChangeNotifier {
     //color
     var responseColors =
         await http.get(Uri.parse("${api().link}/colors"), headers: headers);
+    if (responseColors.statusCode != 200) {
+      debugPrint('❌ Failed to load colors: ${responseColors.statusCode}');
+      return;
+    }
     var colors = json.decode(responseColors.body);
 
     var readyColors = colors["data"].map((map) {
@@ -70,6 +74,11 @@ class FilterProvider with ChangeNotifier {
     //departement
     var responseDepartments = await http
         .get(Uri.parse("${api().link}/departments"), headers: headers);
+    if (responseDepartments.statusCode != 200) {
+      debugPrint(
+          '❌ Failed to load departments: ${responseDepartments.statusCode}');
+      return;
+    }
     var departments = json.decode(responseDepartments.body);
 
     var departmentsReady = departments["data"].map((map) {
@@ -84,6 +93,11 @@ class FilterProvider with ChangeNotifier {
     var responseCategories = await http.get(
         Uri.parse("${api().link}/categories?countSubCategoriesProducts=true"),
         headers: headers);
+    if (responseCategories.statusCode != 200) {
+      debugPrint(
+          '❌ Failed to load categories: ${responseCategories.statusCode}');
+      return;
+    }
     var categories = json.decode(responseCategories.body);
     categoriesJsonData = categories["data"];
     categoriesReady = categories["data"].map<DropdownMenuItem<String>>((value) {
@@ -96,6 +110,10 @@ class FilterProvider with ChangeNotifier {
     //cities
     var responseCities =
         await http.get(Uri.parse("${api().link}/cities"), headers: headers);
+    if (responseCities.statusCode != 200) {
+      debugPrint('❌ Failed to load cities: ${responseCities.statusCode}');
+      return;
+    }
     var cities = json.decode(responseCities.body);
     var citiesReady = cities["data"].map((map) {
       if (map.containsKey("title")) {
@@ -108,6 +126,10 @@ class FilterProvider with ChangeNotifier {
     //styles
     var responseStyles =
         await http.get(Uri.parse("${api().link}/styles"), headers: headers);
+    if (responseStyles.statusCode != 200) {
+      debugPrint('❌ Failed to load styles: ${responseStyles.statusCode}');
+      return;
+    }
     var styles = json.decode(responseStyles.body);
     var stylesReady = styles["data"].map((map) {
       if (map.containsKey("title")) {
@@ -120,6 +142,10 @@ class FilterProvider with ChangeNotifier {
     //companies
     var responseCompanies =
         await http.get(Uri.parse("${api().link}/companies"), headers: headers);
+    if (responseCompanies.statusCode != 200) {
+      debugPrint('❌ Failed to load companies: ${responseCompanies.statusCode}');
+      return;
+    }
     var companies = json.decode(responseCompanies.body);
     var companiesReady = companies["data"].map((map) {
       if (map.containsKey("title")) {
@@ -132,6 +158,10 @@ class FilterProvider with ChangeNotifier {
     //sizes
     var responseSizes =
         await http.get(Uri.parse("${api().link}/sizes"), headers: headers);
+    if (responseSizes.statusCode != 200) {
+      debugPrint('❌ Failed to load sizes: ${responseSizes.statusCode}');
+      return;
+    }
     var sizes = json.decode(responseSizes.body);
     var sizesReady = sizes["data"].map((map) {
       if (map.containsKey("title")) {
@@ -160,6 +190,11 @@ class FilterProvider with ChangeNotifier {
     var responsePriceRange = await http.get(
         Uri.parse("${api().link}/products/price-pair"),
         headers: price_headers);
+    if (responsePriceRange.statusCode != 200) {
+      debugPrint(
+          '❌ Failed to load price range: ${responsePriceRange.statusCode}');
+      return;
+    }
     var priceRange = json.decode(responsePriceRange.body);
     print(priceRange);
     min = double.parse(priceRange["min"]);
@@ -422,6 +457,11 @@ class FilterProvider with ChangeNotifier {
 
 
     var response = await http.get(url, headers: headers);
+    if (response.statusCode != 200) {
+      debugPrint('❌ Failed to load filtered products: ${response.statusCode}');
+      Navigator.pop(context);
+      return;
+    }
     var products = json.decode(response.body)["data"];
     if (products.length == 0) {
       products = [
@@ -470,6 +510,12 @@ class FilterProvider with ChangeNotifier {
     var responseSubCategories = await http.get(
         Uri.parse("${api().link}/categories/$category_id/sub-categories"),
         headers: headers);
+    if (responseSubCategories.statusCode != 200) {
+      debugPrint(
+          '❌ Failed to load sub-categories: ${responseSubCategories.statusCode}');
+      Navigator.pop(context);
+      return;
+    }
 
     var subCategories = json.decode(responseSubCategories.body);
     subcategoriesJsonData = subCategories["data"];

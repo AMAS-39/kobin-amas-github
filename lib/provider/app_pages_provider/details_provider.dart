@@ -120,6 +120,10 @@ class DetailsProvider with ChangeNotifier {
             "${api().link}/favorite-lists/$wishlist_id/products/$product_id"),
         headers: headers,
       );
+      if (response.statusCode != 200) {
+        debugPrint('❌ Remove wishlist failed: ${response.statusCode}');
+        return;
+      }
       print(response.body);
     } else {
       //geting user id and token from stored database
@@ -138,6 +142,10 @@ class DetailsProvider with ChangeNotifier {
             "${api().link}/favorite-lists/$wishlist_id/products/$product_id"),
         headers: headers,
       );
+      if (resposne.statusCode != 200) {
+        debugPrint('❌ Add to wishlist failed: ${resposne.statusCode}');
+        return;
+      }
       print(resposne.body);
     }
     is_Wished = !is_Wished;
@@ -219,7 +227,10 @@ class DetailsProvider with ChangeNotifier {
         Uri.parse("${api().link}/products/$product_id/reviews"),
         headers: headers,
         body: body);
-
     Navigator.pop(context);
+    if (response.statusCode != 200) {
+      debugPrint('❌ Add review failed: ${response.statusCode}');
+      return;
+    }
   }
 }
