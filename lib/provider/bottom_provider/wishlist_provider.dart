@@ -24,6 +24,11 @@ class WishlistProvider with ChangeNotifier {
     var fovouriteIdResponse = await http.get(
         Uri.parse("${api().link}/customers/$id/favorite-lists"),
         headers: {"x-api-key": api().key, "Accept": "application/json"});
+    if (fovouriteIdResponse.statusCode != 200) {
+      debugPrint(
+          '❌ Failed to load wishlist: ${fovouriteIdResponse.statusCode}');
+      return;
+    }
     var favouriteIdJson = json.decode(fovouriteIdResponse.body);
 
     //adding the data to wishlist
@@ -136,6 +141,11 @@ class WishlistProvider with ChangeNotifier {
           'Authorization': 'Bearer $token',
           'Accept': 'application/json'
         });
+    if (fovouriteIdResponse.statusCode != 200) {
+      debugPrint(
+          '❌ Failed to load wishlist products: ${fovouriteIdResponse.statusCode}');
+      return;
+    }
     var favouriteJson = json.decode(fovouriteIdResponse.body);
     print(fovouriteIdResponse.body);
     //adding the data to wishlist

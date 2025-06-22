@@ -29,6 +29,10 @@ class SalesProvider with ChangeNotifier {
 
     final apiLink = Uri.parse("${api().link}/showrooms");
     var sales = await http.get(apiLink, headers: headers);
+    if (sales.statusCode != 200) {
+      debugPrint('❌ Failed to load showrooms: ${sales.statusCode}');
+      return;
+    }
     var salesObj = json.decode(sales.body.toString());
     salesObjects = salesObj["data"];
     if (salesObjects.length == 0) {

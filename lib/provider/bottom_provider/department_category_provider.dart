@@ -39,6 +39,11 @@ class CategoryProvider with ChangeNotifier {
     final apiLink =
         Uri.parse("${api().link}/departments/$department_id/categories");
     var categories = await http.get(apiLink, headers: headers);
+    if (categories.statusCode != 200) {
+      debugPrint(
+          '❌ Failed to load categories: ${categories.statusCode}');
+      return;
+    }
 
     //returning the category data in the right format
     List<dynamic> catObj =
@@ -84,6 +89,10 @@ class CategoryProvider with ChangeNotifier {
     };
     final apiLink = Uri.parse("${api().link}/departments");
     var categories = await http.get(apiLink, headers: headers);
+    if (categories.statusCode != 200) {
+      debugPrint('❌ Failed to load departments: ${categories.statusCode}');
+      return;
+    }
 
     //returning the category data in the right format
     var catObj = json.decode(categories.body.toString());
@@ -113,6 +122,10 @@ class CategoryProvider with ChangeNotifier {
     };
     final apiLink = Uri.parse("${api().link}/categories?page=$page");
     var categories = await http.get(apiLink, headers: headers);
+    if (categories.statusCode != 200) {
+      debugPrint('❌ Failed to load more categories: ${categories.statusCode}');
+      return false;
+    }
     var catObj = json.decode(categories.body.toString());
     appArray.categories.addAll(catObj["data"]);
     notifyListeners();
@@ -155,6 +168,11 @@ class CategoryProvider with ChangeNotifier {
       final apiLink = Uri.parse(
           "${api().link}/products?created_at[sort]=asc&favoriteListsInfo=true&contactDetails=true");
       var categoriesProduct = await http.get(apiLink, headers: headers);
+      if (categoriesProduct.statusCode != 200) {
+        debugPrint(
+            '❌ Failed to load products: ${categoriesProduct.statusCode}');
+        return;
+      }
       catObj = json.decode(categoriesProduct.body.toString());
     } else if (others == "TrendFurnitureList") {
       //adding current language to header of api call and gettig the data
@@ -162,6 +180,11 @@ class CategoryProvider with ChangeNotifier {
       final apiLink = Uri.parse(
           "${api().link}/products?view[sort]=desc&favoriteListsInfo=true&contactDetails=true");
       var categoriesProduct = await http.get(apiLink, headers: headers);
+      if (categoriesProduct.statusCode != 200) {
+        debugPrint(
+            '❌ Failed to load products: ${categoriesProduct.statusCode}');
+        return;
+      }
       catObj = json.decode(categoriesProduct.body.toString());
     } else if (others == "OfferZoneList") {
       //adding current language to header of api call and gettig the data
@@ -169,6 +192,11 @@ class CategoryProvider with ChangeNotifier {
       final apiLink = Uri.parse(
           "${api().link}/products?onSale=true&favoriteListsInfo=true&contactDetails=true");
       var categoriesProduct = await http.get(apiLink, headers: headers);
+      if (categoriesProduct.statusCode != 200) {
+        debugPrint(
+            '❌ Failed to load products: ${categoriesProduct.statusCode}');
+        return;
+      }
       catObj = json.decode(categoriesProduct.body.toString());
     } else if (others == "BestSellingList") {
       //adding current language to header of api call and gettig the data
@@ -176,36 +204,67 @@ class CategoryProvider with ChangeNotifier {
       final apiLink = Uri.parse(
           "${api().link}/products?favoriteListsInfo=true&contactDetails=true&contactDetails=true");
       var categoriesProduct = await http.get(apiLink, headers: headers);
+      if (categoriesProduct.statusCode != 200) {
+        debugPrint(
+            '❌ Failed to load products: ${categoriesProduct.statusCode}');
+        return;
+      }
       catObj = json.decode(categoriesProduct.body.toString());
     } else if (others == "SearchList") {
       final apiLink =
           Uri.parse("${api().link}/products?search[like]=$searchTerm");
       var categoriesProduct = await http.get(apiLink, headers: headers);
+      if (categoriesProduct.statusCode != 200) {
+        debugPrint(
+            '❌ Failed to load products: ${categoriesProduct.statusCode}');
+        return;
+      }
       catObj = json.decode(categoriesProduct.body.toString());
     } else if (others == "subCategory") {
       final apiLink = Uri.parse(
           "${api().link}/categories/$sub_category_id/products?favoriteListsInfo=true&contactDetails=true");
       var categoriesProduct = await http.get(apiLink, headers: headers);
+      if (categoriesProduct.statusCode != 200) {
+        debugPrint(
+            '❌ Failed to load products: ${categoriesProduct.statusCode}');
+        return;
+      }
       catObj = json.decode(categoriesProduct.body.toString());
     } else if (others == "Category") {
       //adding current language to header of api call and gettig the data
       final apiSubCategoryLink =
           Uri.parse("${api().link}/categories/$index/sub-categories");
       var subCategories = await http.get(apiSubCategoryLink, headers: headers);
+      if (subCategories.statusCode != 200) {
+        debugPrint('❌ Failed to load sub-categories: ${subCategories.statusCode}');
+        return;
+      }
       subCategoriesObj = json.decode(subCategories.body.toString())["data"];
 
       //
       final apiLink = Uri.parse(
           "${api().link}/categories/$index/products?favoriteListsInfo=true&contactDetails=true");
       var categoriesProduct = await http.get(apiLink, headers: headers);
+      if (categoriesProduct.statusCode != 200) {
+        debugPrint('❌ Failed to load products: ${categoriesProduct.statusCode}');
+        return;
+      }
       catObj = json.decode(categoriesProduct.body.toString());
     } else if (others == "SalesScreen") {
       final apiLink = Uri.parse("${api().link}/sales/$sales_id/products");
       var categories = await http.get(apiLink, headers: headers);
+      if (categories.statusCode != 200) {
+        debugPrint('❌ Failed to load products: ${categories.statusCode}');
+        return;
+      }
       catObj = json.decode(categories.body.toString());
     } else if (others == "Show Room") {
       final apiLink = Uri.parse("${api().link}/showrooms/$sales_id/products");
       var categories = await http.get(apiLink, headers: headers);
+      if (categories.statusCode != 200) {
+        debugPrint('❌ Failed to load products: ${categories.statusCode}');
+        return;
+      }
 
       catObj = json.decode(categories.body.toString());
     } else {
@@ -214,6 +273,10 @@ class CategoryProvider with ChangeNotifier {
       final apiLink =
           Uri.parse("${api().link}/departments/$department_id/categories");
       var categories = await http.get(apiLink, headers: headers);
+      if (categories.statusCode != 200) {
+        debugPrint('❌ Failed to load categories: ${categories.statusCode}');
+        return;
+      }
       catObj = json.decode(categories.body.toString());
     }
 
@@ -302,6 +365,10 @@ class CategoryProvider with ChangeNotifier {
     final apiLink = Uri.parse(
         "${api().link}/categories/$category_id/products?favoriteListsInfo=true&contactDetails=true");
     var categoriesProduct = await http.get(apiLink, headers: headers);
+    if (categoriesProduct.statusCode != 200) {
+      debugPrint('❌ Failed to load products: ${categoriesProduct.statusCode}');
+      return;
+    }
     catObj = json.decode(categoriesProduct.body.toString());
 
     simmilarProductsList = catObj["data"]
@@ -331,6 +398,11 @@ class CategoryProvider with ChangeNotifier {
     final apiLink =
         Uri.parse("${api().link}/departments?search[like]=${searchCtrl.text}");
     var categoriesProduct = await http.get(apiLink, headers: headers);
+    if (categoriesProduct.statusCode != 200) {
+      debugPrint('❌ Department search failed: ${categoriesProduct.statusCode}');
+      searchCtrl.clear();
+      return;
+    }
     catObj = json.decode(categoriesProduct.body.toString());
     print(catObj);
     if (catObj["message"] != null) {

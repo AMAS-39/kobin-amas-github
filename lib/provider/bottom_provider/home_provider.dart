@@ -52,8 +52,14 @@ class HomeProvider with ChangeNotifier {
       headers: headers,
     );
     print("📡 URL: ${api().link}/products?created_at[sort]=asc&...");
-print("🧾 Status Code: ${newArriablResponse.statusCode}");
-print("📦 Body: ${newArriablResponse.body}");
+    print("🧾 Status Code: ${newArriablResponse.statusCode}");
+    print("📦 Body: ${newArriablResponse.body}");
+
+    if (newArriablResponse.statusCode != 200) {
+      debugPrint(
+          "❌ Failed to load new arrivals: ${newArriablResponse.statusCode}");
+      return;
+    }
 
     var newArrivalResponse = await json.decode(newArriablResponse.body);
 
@@ -77,6 +83,11 @@ print("📦 Body: ${newArriablResponse.body}");
         Uri.parse(
             "${api().link}/products?view[sort]=desc&favoriteListsInfo=true&contactDetails=true"),
         headers: headers);
+    if (terndingResponse.statusCode != 200) {
+      debugPrint(
+          "❌ Failed to load trending furniture: ${terndingResponse.statusCode}");
+      return;
+    }
     var terndingData = await json.decode(terndingResponse.body);
 
     appArray.trendFurniture = terndingData["data"].sublist(
@@ -95,6 +106,11 @@ print("📦 Body: ${newArriablResponse.body}");
         Uri.parse(
             "${api().link}/products?onSale=true&favoriteListsInfo=true&contactDetails=true"),
         headers: headers);
+    if (offerResponse.statusCode != 200) {
+      debugPrint(
+          "❌ Failed to load offers: ${offerResponse.statusCode}");
+      return;
+    }
     var offerData = await json.decode(offerResponse.body);
 
     appArray.offerZone = offerData["data"].sublist(

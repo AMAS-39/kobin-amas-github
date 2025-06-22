@@ -48,6 +48,11 @@ class ForgotProvider with ChangeNotifier {
       };
       var response = await http.post(Uri.parse("${api().link}/forget-password"),
           headers: headers, body: body);
+      if (response.statusCode != 200) {
+        debugPrint('❌ Forgot password request failed: ${response.statusCode}');
+        Navigator.pop(context);
+        return;
+      }
       var messsage = json.decode(response.body);
       print(messsage.toString());
       Navigator.pop(context);

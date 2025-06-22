@@ -61,6 +61,13 @@ class RegistrationProvider with ChangeNotifier {
     if (Navigator.canPop(loadingContext)) {
       Navigator.pop(loadingContext);
     }
+    if (response.statusCode != 200) {
+      debugPrint('❌ Registration failed: ${response.statusCode}');
+      showDialog(
+          context: context,
+          builder: (context) => BlurryErorrAuthDialog());
+      return;
+    }
     try {
       print(response.body);
       var data = await json.decode(response.body);
