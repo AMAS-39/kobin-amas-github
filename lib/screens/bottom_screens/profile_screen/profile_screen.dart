@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart'; // ✅ Add this
+import 'package:kobin/common/api.dart';
 import 'package:kobin/plugin_list.dart';
 import '../../../config.dart';
 
@@ -47,8 +48,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           height: Sizes.s90,
                           width: Sizes.s90,
                           child: CachedNetworkImage(
-                            imageUrl:
-                                "https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/person-4.png",
+                            imageUrl: resolveImageUrl(
+                                "https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/person-4.png"),
                             fit: BoxFit.fill,
                             placeholder: (context, url) => Center(
                               child: CircularProgressIndicator(),

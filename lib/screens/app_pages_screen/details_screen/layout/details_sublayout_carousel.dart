@@ -1,5 +1,6 @@
 import 'package:video_player/video_player.dart';
 import 'package:cached_network_image/cached_network_image.dart'; // ✅ Added import
+import 'package:kobin/common/api.dart';
 import '../../../../config.dart';
 import '../../../../plugin_list.dart';
 
@@ -135,7 +136,7 @@ class _FullScreenMediaPageState extends State<FullScreenMediaPage> {
               return VideoWidget(videoUrl: mediaUrl);
             } else {
               return CachedNetworkImage(
-                imageUrl: mediaUrl,
+                imageUrl: resolveImageUrl(mediaUrl),
                 fit: BoxFit.contain,
                 placeholder: (context, url) => Center(
                   child: CircularProgressIndicator(),

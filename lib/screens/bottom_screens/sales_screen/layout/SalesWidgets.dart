@@ -1,6 +1,7 @@
 import 'package:kobin/config.dart';
 import 'package:svg_flutter/svg.dart';
 import 'package:cached_network_image/cached_network_image.dart'; // ✅ Import it
+import 'package:kobin/common/api.dart';
 
 class SalesWidgets {
   Widget banner(context, image, textTitle, sales_id) {
@@ -42,7 +43,7 @@ class SalesWidgets {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(AppRadius.r8),
                   child: CachedNetworkImage(
-                    imageUrl: image,
+                    imageUrl: resolveImageUrl(image),
                     fit: BoxFit.cover,
                     placeholder: (context, url) => Center(
                       child: CircularProgressIndicator(),

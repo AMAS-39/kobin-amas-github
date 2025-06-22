@@ -1,6 +1,7 @@
 import '../../../../config.dart';
 import '../../../../plugin_list.dart';
 import 'package:cached_network_image/cached_network_image.dart'; // ✅ Add this
+import 'package:kobin/common/api.dart';
 
 class WishlistSubLayout extends StatelessWidget {
   final int index;
@@ -33,7 +34,8 @@ class WishlistSubLayout extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: CachedNetworkImage(
-                      imageUrl: data['images'][0]['url'],
+                      imageUrl:
+                          resolveImageUrl(data['images'][0]['url']),
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Center(
                         child: CircularProgressIndicator(),

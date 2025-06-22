@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart'; // ✅ Add this import
 import 'package:kobin/plugin_list.dart';
+import 'package:kobin/common/api.dart';
 import '../../../../config.dart';
 
 class TrendFurnitureList extends StatelessWidget {
@@ -25,7 +26,8 @@ class TrendFurnitureList extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppRadius.r8),
                 child: CachedNetworkImage( // ✅ Use cached image
-                  imageUrl: data['images'][0]['url'].toString(),
+                  imageUrl:
+                      resolveImageUrl(data['images'][0]['url'].toString()),
                   fit: BoxFit.cover,
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),

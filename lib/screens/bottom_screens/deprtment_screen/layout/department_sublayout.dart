@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart'; // ✅ Add this
+import 'package:kobin/common/api.dart';
 import 'package:kobin/config.dart';
 import 'package:kobin/screens/app_pages_screen/category_screen/category_screen.dart';
 import '../../../../plugin_list.dart';
@@ -42,7 +43,7 @@ class DepartmentSubLayout extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(AppRadius.r8),
                       child: CachedNetworkImage(
-                        imageUrl: data["image"],
+                        imageUrl: resolveImageUrl(data["image"]),
                         fit: BoxFit.cover,
                         placeholder: (context, url) => const Center(
                           child: CircularProgressIndicator(strokeWidth: 2),

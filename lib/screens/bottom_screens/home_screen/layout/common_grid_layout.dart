@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart'; // ✅ Add this
+import 'package:kobin/common/api.dart';
 import '../../../../config.dart';
 import '../../../../plugin_list.dart';
 
@@ -23,7 +24,7 @@ class CommonGridLayout extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.44,
               child: CachedNetworkImage( // ✅ Replace Image.network
-                imageUrl: imagePath,
+                imageUrl: resolveImageUrl(imagePath),
                 fit: BoxFit.fill,
                 placeholder: (context, url) => Center(
                   child: CircularProgressIndicator(),

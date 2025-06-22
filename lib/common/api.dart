@@ -7,3 +7,12 @@ class api {
 
   String get link => "https://$_domain$apiPath";
 }
+
+/// Returns the full image URL by prepending the server domain when needed.
+String resolveImageUrl(String url) {
+  if (url.startsWith('http')) {
+    return url;
+  }
+  final domain = api().domainLink;
+  return 'https://$domain$url';
+}

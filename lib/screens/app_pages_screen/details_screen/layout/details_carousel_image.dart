@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart'; // ✅ Add this
+import 'package:kobin/common/api.dart';
 import '../../../../config.dart';
 
 class DetailsCarousel extends StatelessWidget {
@@ -14,7 +15,7 @@ class DetailsCarousel extends StatelessWidget {
           child: Opacity(
             opacity: 1,
             child: CachedNetworkImage(
-              imageUrl: data,
+              imageUrl: resolveImageUrl(data),
               fit: BoxFit.cover,
               placeholder: (context, url) => const Center(
                 child: CircularProgressIndicator(strokeWidth: 2),
