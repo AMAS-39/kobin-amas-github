@@ -1,6 +1,7 @@
 class RouteName {
   final String splash = '/';
   final String onBoarding = '/OnBoardingScreen';
+  final String languageSelector = '/LanguageSelectorScreen';
   final String login = "/LoginScreen";
   final String registration = "/RegistrationPage";
   final String forgot = "/ForgotScreen";

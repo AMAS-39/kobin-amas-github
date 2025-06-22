@@ -22,6 +22,7 @@ class SplashProvider with ChangeNotifier {
 
   controller!.forward().whenComplete(() async {
     final prefs = await SharedPreferences.getInstance();
+    final langSelected = prefs.getBool(session.isLanguageSelected) ?? false;
     final seenIntro = prefs.getBool('seen_intro') ?? false;
     final token = prefs.getString("token");
 
@@ -29,11 +30,13 @@ class SplashProvider with ChangeNotifier {
     prof.isGuest = token == null;
     prof.notifyListeners();
 
-    if (!seenIntro) {
-  route.pushNamed(context, routeName.onBoarding);
-} else {
-  route.pushNamed(context, routeName.dashboard); // ✅ always go to dashboard
-}
+    if (!langSelected) {
+      route.pushNamed(context, routeName.languageSelector);
+    } else if (!seenIntro) {
+      route.pushNamed(context, routeName.onBoarding);
+    } else {
+      route.pushNamed(context, routeName.dashboard);
+    }
 
   });
 
