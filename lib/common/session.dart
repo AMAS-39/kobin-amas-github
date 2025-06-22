@@ -4,4 +4,5 @@ class Session {
   String isNotification = 'isNotification';
   String isLanguage = 'language_code';
   String isMode = 'isMode';
+  String isLanguageSelected = 'language_selected';
 }

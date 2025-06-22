@@ -1,5 +1,6 @@
 export 'package:kobin/screens/auth_screens/splash_screen/splash_screen.dart';
 export 'package:kobin/screens/auth_screens/onboarding_screen/onboarding_screen.dart';
+export 'package:kobin/screens/auth_screens/language_selector_screen/language_selector_screen.dart';
 export 'package:kobin/widgets/common_layout_text.dart';
 export 'package:kobin/screens/auth_screens/login_screen/login_screen.dart';
 export 'package:kobin/screens/auth_screens/registration_screen/registration_screen.dart';

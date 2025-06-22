@@ -4,6 +4,7 @@ import '../config.dart';
 class AppRoute {
   Map<String, Widget Function(BuildContext)> route = {
     routeName.splash: (p0) => const SplashScreen(),
+    routeName.languageSelector: (p0) => const LanguageSelectorScreen(),
     routeName.onBoarding: (p0) => const OnBoardingScreen(),
     routeName.login: (p0) => const LoginScreen(),
     routeName.registration: (p0) => const RegistrationPage(),
