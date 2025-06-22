@@ -1,0 +1,67 @@
+import 'package:kobin/plugin_list.dart';
+import '../../../../config.dart';
+
+class OfferZoneLayout extends StatelessWidget {
+  const OfferZoneLayout({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer2<HomeProvider, ThemeService>(
+      builder: (context1, home, theme, child) {
+        return Stack(
+          children: [
+            Container(
+              child: Column(
+                children: [
+                  //offer zone text layout
+                  HomeWidget()
+                      .listNameCommon(context,
+                          language(context, appFonts.offer), "OfferZoneList")
+                      .paddingOnly(
+                        top: Insets.i20,
+                        left: Insets.i20,
+                        right: Insets.i20,
+                        bottom: Insets.i15,
+                      ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.155,
+                    child: GridView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: home.newOfferZone.length,
+                      scrollDirection: Axis.horizontal,
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                        childAspectRatio: 0.38,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 10.0,
+                        maxCrossAxisExtent: 160,
+                      ),
+                      itemBuilder: (context, index) {
+                        //offerZone layout and click event product list
+                        return OfferZoneGridLayout(
+                          data: home.newOfferZone[index],
+                          index: index,
+                        ).inkWell(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailsScreen(
+                                product: home.newOfferZone[index],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ).paddingOnly(left: Insets.i20, right: Insets.i20),
+                  const VSpace(Sizes.s30),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
