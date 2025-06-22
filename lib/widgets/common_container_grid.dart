@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart'; // ✅ Add this
+import 'package:kobin/common/api.dart';
 import '../config.dart';
 
 class CommonContainerGrid extends StatelessWidget {
@@ -52,7 +53,7 @@ class CommonContainerGrid extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(AppRadius.r8),
                     child: CachedNetworkImage(
-                      imageUrl: imagePath,
+                      imageUrl: resolveImageUrl(imagePath),
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Center(
                         child: CircularProgressIndicator(),

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart'; // ✅ Add this
+import 'package:kobin/common/api.dart';
 import '../../../../config.dart';
 import '../../../../plugin_list.dart';
 
@@ -26,7 +27,8 @@ class OfferZoneSubLayout extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(AppRadius.r8),
                       child: CachedNetworkImage( // ✅ Replace Image.network
-                        imageUrl: data['images'][0]['url'].toString(),
+                        imageUrl: resolveImageUrl(
+                            data['images'][0]['url'].toString()),
                         fit: BoxFit.cover,
                         placeholder: (context, url) => Center(
                           child: CircularProgressIndicator(),

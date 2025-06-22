@@ -1,6 +1,7 @@
 import 'package:kobin/config.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:cached_network_image/cached_network_image.dart'; // ✅ Add this
+import 'package:kobin/common/api.dart';
 
 class CommonSubCategory extends StatelessWidget {
   final List subCategories;
@@ -49,7 +50,8 @@ class CommonSubCategory extends StatelessWidget {
                             width: 50,
                             height: 100,
                             child: CachedNetworkImage(
-                              imageUrl: subCategories[index]["image"].toString(),
+                              imageUrl: resolveImageUrl(
+                                  subCategories[index]["image"].toString()),
                               fit: BoxFit.cover,
                               placeholder: (context, url) => const Center(
                                 child: CircularProgressIndicator(strokeWidth: 2),

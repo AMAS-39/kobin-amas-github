@@ -1,6 +1,7 @@
 import 'package:kobin/config.dart';
 import 'package:kobin/screens/app_pages_screen/category_screen/layout/category_top_sublayout.dart';
 import 'package:cached_network_image/cached_network_image.dart'; // 🔁 import this
+import 'package:kobin/common/api.dart';
 
 import '../../../../plugin_list.dart';
 
@@ -50,7 +51,7 @@ class CategorySubLayout extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(AppRadius.r8),
                       child: CachedNetworkImage(
-                        imageUrl: data["image"],
+                        imageUrl: resolveImageUrl(data["image"]),
                         fit: BoxFit.cover,
                         placeholder: (context, url) => Center(
                           child: CircularProgressIndicator(),
