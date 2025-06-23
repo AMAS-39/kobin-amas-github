@@ -12,25 +12,26 @@ class LanguageSelectorScreen extends StatelessWidget {
           backgroundColor: appColor(context).appTheme.backGroundColorMain,
           body: SafeArea(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const VSpace(Sizes.s20),
-                Center(
-                  child: Text(
-                    language(context, appFonts.language),
-                    style: appCss.dmPoppinsSemiBold20
-                        .textColor(isThemeColorReturn(context)),
-                  ),
+                const VSpace(Sizes.s30),
+                // Title
+                Text(
+                  language(context, appFonts.language),
+                  textAlign: TextAlign.center,
+                  style: appCss.dmPoppinsSemiBold24
+                      .textColor(isThemeColorReturn(context)),
                 ),
-                const VSpace(Sizes.s6),
-                Center(
-                  child: Text(
-                    language(context, appFonts.languageSubTitle),
-                    style: appCss.dmPoppinsRegular14
-                        .textColor(appColor(context).appTheme.txt),
-                  ),
+                const VSpace(Sizes.s10),
+                // Subtitle
+                Text(
+                  language(context, appFonts.languageSubTitle),
+                  textAlign: TextAlign.center,
+                  style: appCss.dmPoppinsRegular14
+                      .textColor(appColor(context).appTheme.lightText),
                 ),
                 const VSpace(Sizes.s30),
+                // Language Options
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
@@ -38,20 +39,47 @@ class LanguageSelectorScreen extends StatelessWidget {
                           .asMap()
                           .entries
                           .map(
-                            (e) => LanguageSubLayout(
-                              index: e.key,
-                              data: e.value,
-                            ).inkWell(
+                            (e) => InkWell(
+                              borderRadius: BorderRadius.circular(14),
                               onTap: () {
-                                languageCtrl
-                                    .changeLocale(e.value['title'].toString());
+                                languageCtrl.changeLocale(
+                                    e.value['title'].toString());
                               },
+                              child: Container(
+                                margin: const EdgeInsets.only(bottom: 12),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 18, vertical: 14),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.9), // Fallback color
+                                  borderRadius: BorderRadius.circular(14),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black12,
+                                      blurRadius: 6,
+                                      offset: Offset(0, 3),
+                                    )
+                                  ],
+                                ),
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.language, size: 20),
+                                    const HSpace(Sizes.s10),
+                                    Expanded(
+                                      child: Text(
+                                        e.value['title'],
+                                        style: appCss.dmPoppinsMedium16,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           )
                           .toList(),
                     ).paddingSymmetric(horizontal: Insets.i20),
                   ),
                 ),
+                // Continue Button
                 ButtonCommon(
                   title: language(context, appFonts.continueShopping),
                   onTap: () async {

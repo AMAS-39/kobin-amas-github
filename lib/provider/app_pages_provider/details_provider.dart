@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/scheduler.dart';
 
 import 'package:kobin/common/api.dart';
 import 'package:kobin/config.dart';
@@ -42,12 +43,19 @@ class DetailsProvider with ChangeNotifier {
   }
 
 // reviews on ready
-  onDetailsReady(product) async {
-    currentValue = 1 / product["images"].length + product["videos"].length;
-    currentPage = 0;
-    lengthMedia = product["images"].length + product["videos"].length;
+void onDetailsReady(product) {
+  final total = (product["images"]?.length ?? 0) + (product["videos"]?.length ?? 0);
+  currentValue = total > 0 ? 1 / total : 0;
+  currentPage = 0;
+  lengthMedia = total;
+
+  // Fully safe way: ensures notifyListeners runs after full build
+  SchedulerBinding.instance.addPostFrameCallback((_) {
     notifyListeners();
-  }
+  });
+}
+
+
 
 //details 1 dropdown click
   isClickDown(String value) {
