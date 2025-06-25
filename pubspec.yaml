@@ -51,6 +51,10 @@ flutter:
     - assets/images/
     - assets/svg/
     - assets/gif/
+    - assets/flags/kurdistan.png
+    - assets/flags/usa.png
+    - assets/flags/saudi.png
+    - assets/images/icon.png
 
   fonts:
     - family: Poppins

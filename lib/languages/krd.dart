@@ -307,7 +307,7 @@ final dynamic krd = {
   "alertDescription":
       "Your order is accepted. Your items are on the way and should arrive shortly.",
   "tracking": "Tracking Order",
-  "continueShopping": "Continue Shopping",
+  "continueShopping": "بەردەوام بە لە فرۆشتن",
   "orderTrackingDate": "01 Dec, 2022",
   "orderId": "Order ID :  ",
   'orderNo': "#1245035000",
@@ -480,5 +480,5 @@ final dynamic krd = {
   "subCategory": "پۆلی لاوەکی",
   "category": "پۆل",
   "company": "کۆمپانیا",
-  "logoutResure": "دڵنیای کە دەتەوێت بچیتە دەرەوە؟"
+  "logoutResure": "دڵنیای کە دەتەوێت بچیتە دەرەوە؟",
 };

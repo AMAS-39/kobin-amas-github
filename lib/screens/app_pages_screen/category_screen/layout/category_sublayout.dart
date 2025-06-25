@@ -56,9 +56,11 @@ class CategorySubLayout extends StatelessWidget {
                         placeholder: (context, url) => Center(
                           child: CircularProgressIndicator(),
                         ),
-                        errorWidget: (context, url, error) => Center(
-                          child: Icon(Icons.error),
-                        ),
+                        errorWidget: (context, url, error) => Image.asset(
+  'assets/images/icon.png',
+  fit: BoxFit.cover,
+),
+
                       ),
                     ),
                   ),

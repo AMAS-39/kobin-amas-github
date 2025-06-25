@@ -33,52 +33,69 @@ class LanguageSelectorScreen extends StatelessWidget {
                 const VSpace(Sizes.s30),
                 // Language Options
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: appArray.languageList
-                          .asMap()
-                          .entries
-                          .map(
-                            (e) => InkWell(
-                              borderRadius: BorderRadius.circular(14),
-                              onTap: () {
-                                languageCtrl.changeLocale(
-                                    e.value['title'].toString());
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.only(bottom: 12),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 18, vertical: 14),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.9), // Fallback color
-                                  borderRadius: BorderRadius.circular(14),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black12,
-                                      blurRadius: 6,
-                                      offset: Offset(0, 3),
-                                    )
-                                  ],
-                                ),
-                                child: Row(
-                                  children: [
-                                    const Icon(Icons.language, size: 20),
-                                    const HSpace(Sizes.s10),
-                                    Expanded(
-                                      child: Text(
-                                        e.value['title'],
-                                        style: appCss.dmPoppinsMedium16,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ).paddingSymmetric(horizontal: Insets.i20),
+  child: SingleChildScrollView(
+    child: Column(
+      children: appArray.languageList
+          .asMap()
+          .entries
+          .map(
+            (e) {
+              // Map index to native name & flag
+              String displayName = "";
+              String flagPath = "";
+
+              if (e.key == 0) {
+                displayName = "English"; // English
+                flagPath = "assets/flags/usa.png";
+              } else if (e.key == 1) {
+                displayName = "العربية"; // Arabic
+                flagPath = "assets/flags/saudi.png";
+              } else if (e.key == 2) {
+                displayName = "کوردی"; // Kurdish
+                flagPath = "assets/flags/kurdistan.png";
+              }
+
+              return InkWell(
+                borderRadius: BorderRadius.circular(14),
+                onTap: () {
+                  languageCtrl.changeLocale(e.value['title'].toString());
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 18, vertical: 14),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.9),
+                    borderRadius: BorderRadius.circular(14),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 6,
+                        offset: Offset(0, 3),
+                      )
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Image.asset(flagPath, width: 24, height: 24),
+                      const HSpace(Sizes.s10),
+                      Expanded(
+                        child: Text(
+                          displayName,
+                          style: appCss.dmPoppinsMedium16,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+              );
+            },
+          )
+          .toList(),
+    ).paddingSymmetric(horizontal: Insets.i20),
+  ),
+),
+
                 // Continue Button
                 ButtonCommon(
                   title: language(context, appFonts.continueShopping),

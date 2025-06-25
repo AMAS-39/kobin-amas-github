@@ -20,7 +20,11 @@ class DetailsCarousel extends StatelessWidget {
               placeholder: (context, url) => const Center(
                 child: CircularProgressIndicator(strokeWidth: 2),
               ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+              errorWidget: (context, url, error) => Image.asset(
+  'assets/images/icon.png',
+  fit: BoxFit.cover,
+),
+
             ),
           ),
         )
